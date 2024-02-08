@@ -1,0 +1,18 @@
+<div id="<%= dom_id post %>" class="bg-gray-200 rounded-lg px-4 py-2 shadow-lg">
+  <p class="mb-4 text-lg">
+    <%= post.body %>
+  </p>
+
+  <p class="my-5">
+    posted by <%= post.user_username %>, <%= time_ago_in_words(post.created_at) %> ago
+  </p>
+
+  <% if current_user == post.user %>
+    <%= link_to "Edit this post", edit_post_path(post), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+  <% else %>
+    <div class="flex items-center gap-4">
+      <%= render "like_button", user: current_user, post: post %>
+      <%= render "retweet_button", user: current_user, post: post %>
+    </div>
+  <% end %>
+</div>
